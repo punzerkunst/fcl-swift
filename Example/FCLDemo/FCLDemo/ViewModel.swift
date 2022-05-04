@@ -204,7 +204,7 @@ class ViewModel: NSObject, ObservableObject {
                     self.address = error.localizedDescription
                 }
             } receiveValue: { result in
-                self.address = result.address ?? ""
+                self.address = result.data?.addr ?? ""
             }.store(in: &cancellables)
     }
 

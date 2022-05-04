@@ -17,7 +17,7 @@ public struct AuthnResponse: Decodable {
     let status: Status
     var updates: Service?
     var local: Service?
-    var data: AuthnData?
+    public var data: AuthnData?
     let reason: String?
     let compositeSignature: AuthnData?
     var authorizationUpdates: Service?
@@ -54,8 +54,8 @@ public struct AuthnResponse: Decodable {
     }
 }
 
-struct AuthnData: Decodable {
-    let addr: String?
+public struct AuthnData: Decodable {
+    public let addr: String?
     let fType: String?
     let fVsn: String?
     let services: [Service]?
