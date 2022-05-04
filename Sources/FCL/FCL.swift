@@ -52,7 +52,7 @@ public final class FCL: NSObject {
         currentUser = nil
     }
 
-    func reauthenticate() -> Future<FCLResponse, Error> {
+    func reauthenticate() -> Future<AuthnResponse, Error> {
         // TODO: implement this
         unauthenticate()
         return authenticate()
@@ -126,7 +126,7 @@ public final class FCL: NSObject {
         }
     }
 
-    public func authenticate() -> Future<FCLResponse, Error> {
+    public func authenticate() -> Future<AuthnResponse, Error> {
         return Future { promise in
             guard let endpoint = self.config.get(.authn),
                   let url = URL(string: endpoint)
@@ -134,9 +134,9 @@ public final class FCL: NSObject {
                 return promise(.failure(Flow.FError.urlEmpty))
             }
             self.api.execHttpPost(url: url)
-                .map { response -> FCLResponse in
+                .map { response -> AuthnResponse in
                     self.currentUser = self.buildUser(authn: response)
-                    return FCLResponse(address: response.data?.addr)
+                    return response
                 }
                 .receive(on: DispatchQueue.main)
                 .sink { _ in

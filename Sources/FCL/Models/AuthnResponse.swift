@@ -11,7 +11,7 @@ public struct FCLResponse {
     public let address: String?
 }
 
-struct AuthnResponse: Decodable {
+public struct AuthnResponse: Decodable {
     let fType: String?
     let fVsn: String?
     let status: Status
@@ -34,7 +34,7 @@ struct AuthnResponse: Decodable {
         case authorizationUpdates
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         fType = try? container.decode(String.self, forKey: .fType)
         fVsn = try? container.decode(String.self, forKey: .fVsn)
